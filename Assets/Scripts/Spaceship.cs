@@ -9,6 +9,7 @@ public class Spaceship : MonoBehaviour
     private int _maxHealth;
 
     public event UnityAction OnSpaceshipDie;
+    public event UnityAction<int> OnHealthChanged;
 
     private void Start()
     {
@@ -21,6 +22,8 @@ public class Spaceship : MonoBehaviour
 
         if (_health <= 0)
             Die();
+
+        OnHealthChanged?.Invoke(_health);
     }
 
     public void RegenerateHealth(int quality)
