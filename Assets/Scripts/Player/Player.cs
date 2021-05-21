@@ -24,12 +24,12 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _spaceship.OnSpaceshipDie += OnPlayerDie;
+        _spaceship.SpaceshipDied += OnPlayerDie;
     }
 
     private void OnDisable()
     {
-        _spaceship.OnSpaceshipDie -= OnPlayerDie;
+        _spaceship.SpaceshipDied -= OnPlayerDie;
     }
 
     public void TakeDamageOnEnemyGone()

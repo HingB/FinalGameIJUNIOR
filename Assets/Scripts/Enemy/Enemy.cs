@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _spaceship.OnSpaceshipDie += OnDie;
+        _spaceship.SpaceshipDied += OnDie;
     }
 
     private void OnDisable()
     {
-        _spaceship.OnSpaceshipDie -= OnDie;
+        _spaceship.SpaceshipDied -= OnDie;
     }
 
     private void OnDie()

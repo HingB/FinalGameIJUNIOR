@@ -4900,3 +4900,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeBeforeDeath: 10
   _speed: 10
+  _damage: 20

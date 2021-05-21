@@ -26,8 +26,6 @@ public class SpaceshipShooter : MonoBehaviour
     {
         int shootPointNumber = Random.Range(0, _shootPoints.Length);
 
-        Bullet bullet = Instantiate(_bulletTemplate, _shootPoints[shootPointNumber].position, _shootPoints[shootPointNumber].rotation);
-
-        bullet.SetDamage(_damage);
+        Instantiate(_bulletTemplate, _shootPoints[shootPointNumber].position, _shootPoints[shootPointNumber].rotation);
     }
 }

@@ -10,16 +10,17 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _playersShip.OnHealthChanged += SetSliderValue;
+        _playersShip.HealthChanged += OnValueChanged;
+        _slider.maxValue = 1;
     }
 
     private void OnDisable()
     {
-        _playersShip.OnHealthChanged -= SetSliderValue;
+        _playersShip.HealthChanged -= OnValueChanged;
     }
 
-    public void SetSliderValue(int value)
+    public void OnValueChanged(int value, int maxValue)
     {
-        _slider.value = value;
+        _slider.value = (float)value / maxValue;
     }
 }
