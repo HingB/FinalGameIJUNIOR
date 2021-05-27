@@ -5,22 +5,21 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Spaceship _playersShip;
+    [SerializeField] private Player _player;
     [SerializeField] private Slider _slider;
 
     private void OnEnable()
     {
-        _playersShip.HealthChanged += OnValueChanged;
-        _slider.maxValue = 1;
+        _player.HealthChanged += OnValueChanged;
     }
 
     private void OnDisable()
     {
-        _playersShip.HealthChanged -= OnValueChanged;
+        _player.HealthChanged -= OnValueChanged;
     }
 
-    public void OnValueChanged(int value, int maxValue)
+    public void OnValueChanged(int value)
     {
-        _slider.value = (float)value / maxValue;
+        _slider.value = value;
     }
 }

@@ -10,15 +10,15 @@ public class PanelOnDieShower : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.OnDie += OnPlayerDie;
+        _player.Died += OnPlayerDied;
     }
 
     private void OnDisable()
     {
-        _player.OnDie -= OnPlayerDie;
+        _player.Died -= OnPlayerDied;
     }
 
-    private void OnPlayerDie()
+    private void OnPlayerDied()
     {
         _restartPanel.SetActive(true);
     }

@@ -5,10 +5,30 @@ using TMPro;
 
 public class EnemiesDestroyedQuantityIndicator : MonoBehaviour
 {
+    [SerializeField] private EnemySpawner _spawner;
     [SerializeField] private TMP_Text _text;
 
-    public void SetNewEnemiesDestoedCount(int newValue)
+    private int _enemyDestroyedCount;
+
+    private void OnEnable()
     {
-        _text.text = newValue.ToString();
+        _spawner.EnemyKilled += OnEnemyKilled;
+    }
+
+    private void OnDisable()
+    {
+        _spawner.EnemyKilled -= OnEnemyKilled;
+    }
+
+    private void OnEnemyKilled()
+    {
+        _enemyDestroyedCount++;
+
+        UpdateCounter();
+    }
+
+    private void UpdateCounter()
+    {
+        _text.text = _enemyDestroyedCount.ToString();
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Spaceship : MonoBehaviour
+public abstract class Spaceship : MonoBehaviour
 {
     [SerializeField] private int _currentHealth;
     private int _maxHealth;
 
-    public event UnityAction SpaceshipDied;
-    public event UnityAction<int, int> HealthChanged;
+    public event UnityAction<Spaceship> Destoyed;
+    public event UnityAction<int> HealthChanged;
 
-    private void Start()
+    private void Awake()
     {
         _maxHealth = _currentHealth;
     }
@@ -23,14 +23,15 @@ public class Spaceship : MonoBehaviour
         if (_currentHealth <= 0)
             Die();
 
-        HealthChanged?.Invoke(_currentHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth);
     }
 
-    public void RegenerateHealth(int quality)
+    protected void RegenerateHealth(int quantity)
     {
-        _currentHealth += quality;
+        _currentHealth += quantity;
 
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth);
     }
 
     public void ImmediateDeath()
@@ -40,6 +41,7 @@ public class Spaceship : MonoBehaviour
 
     private void Die()
     {
-        SpaceshipDied?.Invoke();
+        Destoyed?.Invoke(this);
+        Destroy(gameObject);
     }
 }

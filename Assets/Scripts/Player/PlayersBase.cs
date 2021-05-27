@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PlayersBase : MonoBehaviour
 {
+    [SerializeField] private Player _player;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Spaceship spaceship))
         {
-            Player player = FindObjectOfType<Player>();
-
-            if(player != null)
-                player.TakeDamageOnEnemyGone();
+            _player.TakeDamageOnEnemyGone();
 
             spaceship.ImmediateDeath();
         }

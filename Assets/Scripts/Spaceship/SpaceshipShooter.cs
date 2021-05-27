@@ -6,7 +6,6 @@ public class SpaceshipShooter : MonoBehaviour
 {
     [SerializeField] private Transform[] _shootPoints;
     [SerializeField] private Bullet _bulletTemplate;
-    [SerializeField] private int _damage;
     [SerializeField] private float _timeBetweenShots;
 
     private float _lastShotTime;

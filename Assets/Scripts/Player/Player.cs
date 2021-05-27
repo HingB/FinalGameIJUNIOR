@@ -3,65 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class Player : Spaceship
 {
     [SerializeField] private float _timeBetweenRegenerate;
     [SerializeField] private int _healthOnRegenerate;
     [SerializeField] private int _damageOnEnemyGone;
-    [SerializeField] private Spaceship _spaceship;
-    [SerializeField] private EnemiesDestroyedQuantityIndicator _destoyedEnemiesIndicator;
 
-    private int _enemysDestroyed;
-
-    public event UnityAction OnDie;
+    public event UnityAction Died;
 
     private void Start()
     {
-        ShowEnemyDiedCount();
-
         StartCoroutine(Regenerate());
-    }
-
-    private void OnEnable()
-    {
-        _spaceship.SpaceshipDied += OnPlayerDie;
-    }
-
-    private void OnDisable()
-    {
-        _spaceship.SpaceshipDied -= OnPlayerDie;
     }
 
     public void TakeDamageOnEnemyGone()
     {
-        _spaceship.TakeDamage(_damageOnEnemyGone);
+        TakeDamage(_damageOnEnemyGone);
     }
 
-    private void OnPlayerDie()
+    private void OnDestroy()
     {
-        OnDie?.Invoke();
+        Died?.Invoke();
         StopCoroutine(Regenerate());
-        Destroy(gameObject);
     }
-
-    public void OnEnemyKilled()
-    {
-        _enemysDestroyed++;
-
-        ShowEnemyDiedCount();
-    }
-
-    private void ShowEnemyDiedCount()
-    {
-        _destoyedEnemiesIndicator.SetNewEnemiesDestoedCount(_enemysDestroyed);
-    }
-
 
     private IEnumerator Regenerate()
     {
         while (true)
         {
-            _spaceship.RegenerateHealth(_healthOnRegenerate);
+            RegenerateHealth(_healthOnRegenerate);
             yield return new WaitForSeconds(_timeBetweenRegenerate);
         }
     }

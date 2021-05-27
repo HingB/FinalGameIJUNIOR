@@ -2,30 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Spaceship
 {
-    [SerializeField] private Spaceship _spaceship;
 
-    private Player _player;
-
-    private void OnEnable()
-    {
-        _spaceship.SpaceshipDied += OnDie;
-    }
-
-    private void OnDisable()
-    {
-        _spaceship.SpaceshipDied -= OnDie;
-    }
-
-    private void OnDie()
-    {
-        _player = FindObjectOfType<Player>();
-
-        if(_player != null)
-            _player.OnEnemyKilled();
-
-
-        Destroy(gameObject);
-    }
 }
